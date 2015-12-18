@@ -1,0 +1,9 @@
+/*css default*/
+div#preload {
+  display: none;
+}
+div#masterySim {
+  background-image: url("../imgs/mastery-background.jpg");
+  width: 828px;
+  height: 479px;
+}
