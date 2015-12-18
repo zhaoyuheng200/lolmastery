@@ -112,8 +112,8 @@ var masteryData = [
           levelDesc: []
         },
         {
-          index: 7;
-          order: 1;
+          index: 7,
+          order: 1,
           name: "Feast",
           levels: 1,
           desc: "Killing a unit restores 20 Health (25 seconds cooldown)",
@@ -483,8 +483,8 @@ var masteryData = [
           levelDesc: []
         },
         {
-          index: 34;
-          order: 1;
+          index: 34,
+          order: 1,
           name: "Perseverance",
           levels: 1,
           desc: "+50% Health Regen, increased to +200%\nwhen below 20% Health",
