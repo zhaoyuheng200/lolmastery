@@ -497,7 +497,7 @@ var masteryData = [
       type: "normal",
       masteries:[
         {
-          index: 34,
+          index: 35,
           order: 0,
           name: "Swiftness",
           levels: 5,
@@ -510,7 +510,7 @@ var masteryData = [
           ]
         },
         {
-          index: 35,
+          index: 36,
           order: 1,
           name: "Legendary Guardian",
           levels: 5,
@@ -529,7 +529,7 @@ var masteryData = [
       type: "key",
       masteries:[
         {
-          index: 36,
+          index: 37,
           order: 0,
           name: "Grasp of the Undying",
           levels: 1,
@@ -537,7 +537,7 @@ var masteryData = [
           levelDesc: []
         },
         {
-          index: 37,
+          index: 38,
           order: 1,
           name: "Strength of the Ages",
           levels: 1,
@@ -545,7 +545,7 @@ var masteryData = [
           levelDesc: []
         },
         {
-          index: 38,
+          index: 39,
           order: 2,
           name: "Bond of Stone",
           levels: 1,
