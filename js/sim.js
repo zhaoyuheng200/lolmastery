@@ -1,0 +1,5 @@
+//Global
+var MAX_POINTS = 30;
+var POINTS_REQUIRED = [0,5,6,11,12,17];
+var POINTS_STYLES =[
+]
