@@ -1,18 +1,100 @@
 /*css default*/
-div#preload {
+#preload {
   display: none;
 }
-div#masterySim {
+#masterySim {
   background-image: url("../imgs/mastery-background.jpg");
-  width: 828px;
-  height: 479px;
+  background-size: 100% 100%;
+  width: 900px;
+  height: 650px;
 }
-div#masterySim_2 {
-  background-image: url("../imgs/mastery-background.jpg");
-  width: 828px;
-  height: 479px;
-}
-div.tree{
-  width: 276px;
+.tree{
+  padding-top: 20px;
+  width: 300px;
   float: left;
+}
+
+.tier{
+  margin-left: 40px;
+  margin-right: 40px;
+  width: 220px;;
+  height: 64px;
+  position: relative;
+}
+
+.tier.normal-length-2{
+  padding-top: 20px;
+}
+
+.tier.key-length-2, .tier.key-length-3{
+  padding-top: 30px;
+}
+.icon{
+  width: 64px;
+  height: 64px;
+  margin: 0px;
+  padding: 0px;
+  position: absolute;
+}
+.icon div{
+  position: absolute;
+}
+.normal-length-2>.icon.order-0{
+  left: 0px;
+}
+.normal-length-2>.icon.order-1{
+  left: 156px;
+}
+.key-length-2>.icon.order-0{
+  left: 39px;
+}
+.key-length-2>.icon.order-1{
+  left: 117px;
+}
+.key-length-3>.icon.order-0{
+  left: 0px;
+}
+.key-length-3>.icon.order-1{
+  left: 78px;
+}
+.key-length-3>.icon.order-2{
+  left: 156px;
+}
+/*frame sprite*/
+.icon-frame{
+  background-image: url("../imgs/frame-sprite.png");
+  width: 90px;
+  height: 90px;
+  left: -13px;
+  top: -13px;
+}
+.icon-frame.unavailable{
+  background-position: 0px 0px;
+}
+.icon-frame.available{
+  background-position: -90px 0px;
+}
+.key-tier-0 .icon-frame.active{
+  background-position: -180px 0px;
+}
+#ferocity .key-tier-1 .icon-frame.active{
+  background-position: 0px -90px;
+}
+#ferocity .key-tier-2 .icon-frame.active{
+  background-position: 0px -180px;
+}
+#cunning .key-tier-1 .icon-frame.active{
+  background-position: -90px -90px;
+}
+#cunning .key-tier-2 .icon-frame.active{
+  background-position: -180px -180px;
+}
+#resolve .key-tier-1 .icon-frame.active{
+  background-position: -90px -90px;
+}
+#resolve .key-tier-2 .icon-frame.active{
+  background-position: -180px -180px;
+}
+.icon-frame{
+  background-position: 0px 0px;
 }

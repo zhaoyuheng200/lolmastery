@@ -7,7 +7,7 @@
 .icons-27.active, .icons-28.active, .icons-29.active, .icons-3.active, .icons-30.active, 
 .icons-31.active, .icons-32.active, .icons-33.active, .icons-34.active, .icons-35.active, 
 .icons-36.active, .icons-37.active, .icons-38.active, .icons-39.active, .icons-4.active, 
-.icons-5.active, .icons-6.active, .icons-7.active, .icons-8.active, .icons-9.active { display: inline-block; background: url('imgs/mastery-sprite.png') no-repeat; overflow: hidden; text-indent: -9999px; text-align: left; }
+.icons-5.active, .icons-6.active, .icons-7.active, .icons-8.active, .icons-9.active { display: inline-block; background: url('../imgs/mastery-sprite.png') no-repeat; overflow: hidden; text-indent: -9999px; text-align: left; }
  
 .icons-0.active { background-position: -2px -0px; width: 64px; height: 64px; }
 .icons-1.active { background-position: -68px -0px; width: 64px; height: 64px; }

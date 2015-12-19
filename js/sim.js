@@ -1,5 +1,6 @@
 //Global
 var c = {
+  DEBUG: true,
   MAX_POINTS: 30,
   POINTS_REQUIRED: [0,5,6,11,12,17],
   TIER_NORMAL: "normal",
@@ -32,20 +33,22 @@ var paintTree = function(index){
 var paintTier = function($treeNode,tiers){
   for (var i = 0; i < tiers.length; i++){
     var $tierNode = $("<div>");
-    $tierNode.addClass("tier-"+tiers[i].tier);
+    $tierNode
+      .addClass("tier")
+      .addClass("tier-"+tiers[i].tier);
     if (tiers[i].type == c.TIER_NORMAL){
-      $tierNode.addClass(c.TIER_NORMAL);
+      $tierNode.addClass(c.TIER_NORMAL+"-length-"+tiers[i].masteries.length);
     }else{
-      $tierNode.addClass(c.TIER_KEY);
+      $tierNode.addClass(c.TIER_KEY+"-length-"+tiers[i].masteries.length);
       switch(tiers[i].tier){
         case 1:
-          $tierNode.addClass(c.TIER_KEY+"-0");
+          $tierNode.addClass(c.TIER_KEY+"-tier-0");
 	  break;
         case 3:
-          $tierNode.addClass(c.TIER_KEY+"-1");
+          $tierNode.addClass(c.TIER_KEY+"-tier-1");
 	  break;
         case 5:
-          $tierNode.addClass(c.TIER_KEY+"-2");
+          $tierNode.addClass(c.TIER_KEY+"-tier-2");
 	  break;
       }
     }
@@ -58,7 +61,11 @@ var paintIcons = function($tierNode,tierData){
   var masteries = tierData.masteries;
   for (var i = 0; i < masteries.length; i++){
     var $iconNode = $("<div>");
-    $iconNode.addClass("icons-"+masteries[i].index);
+    $iconNode
+      .addClass("icon")
+      .addClass("order-"+masteries[i].order);
+    $iconNode.append($("<div>").addClass("icons-"+masteries[i].index).addClass("iconButton"));
+    $iconNode.append($("<div>").addClass("icon-frame"));
     if (tierData.type == c.TIER_NORMAL){
       $iconNode.append($("<div>").addClass("points"));
     }
@@ -66,5 +73,16 @@ var paintIcons = function($tierNode,tierData){
   }
 }
 
+function init(){
+  paintSim();
+  if (c.DEBUG){
+    $(".icons-0").siblings(".icon-frame").addClass("unavailable");
+    $(".icons-1").siblings(".icon-frame").addClass("available");
+    $(".icons-1").addClass("active");
+    $(".icons-2").siblings(".icon-frame").addClass("active");
+    $(".icons-6").siblings(".icon-frame").addClass("active");
+    $(".icons-10").siblings(".icon-frame").addClass("active");
+  }
+}
 
-paintSim();
+$(document).ready(init)
