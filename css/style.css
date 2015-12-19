@@ -7,3 +7,12 @@ div#masterySim {
   width: 828px;
   height: 479px;
 }
+div#masterySim_2 {
+  background-image: url("../imgs/mastery-background.jpg");
+  width: 828px;
+  height: 479px;
+}
+div.tree{
+  width: 276px;
+  float: left;
+}
