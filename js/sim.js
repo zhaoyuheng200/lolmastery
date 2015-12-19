@@ -82,6 +82,13 @@ function init(){
     $(".icons-2").siblings(".icon-frame").addClass("active");
     $(".icons-6").siblings(".icon-frame").addClass("active");
     $(".icons-10").siblings(".icon-frame").addClass("active");
+    $(".icons-15").siblings(".icon-frame").addClass("active");
+    $(".icons-20").siblings(".icon-frame").addClass("active");
+    $(".icons-24").siblings(".icon-frame").addClass("active");
+    $(".icons-27").siblings(".icon-frame").addClass("active");
+    $(".icons-30").siblings(".icon-frame").addClass("active");
+    $(".icons-34").siblings(".icon-frame").addClass("active");
+    $(".icons-37").siblings(".icon-frame").addClass("active");
   }
 }
 

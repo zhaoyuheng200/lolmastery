@@ -87,10 +87,10 @@
   background-position: -90px -90px;
 }
 #cunning .key-tier-2 .icon-frame.active{
-  background-position: -180px -180px;
+  background-position: -90px -180px;
 }
 #resolve .key-tier-1 .icon-frame.active{
-  background-position: -90px -90px;
+  background-position: -180px -90px;
 }
 #resolve .key-tier-2 .icon-frame.active{
   background-position: -180px -180px;
