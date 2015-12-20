@@ -1,4 +1,17 @@
-var treeData=["Ferocity","Cunning","Resolve"];
+var treeData = [
+  {
+    id: 0,
+    name: "Ferocity"
+  },
+  {
+    id: 1,
+    name: "Cunning"
+  },
+  {
+    id: 2,
+    name: "Resolve"
+  }
+];
 var masteryData = [
   //Ferocity
   [

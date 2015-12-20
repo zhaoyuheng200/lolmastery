@@ -25,7 +25,7 @@ var paintTree = function(index){
   var $treeNode = 
     $("<div>")
       .addClass("tree")
-      .attr("id",treeData[index].toLowerCase());
+      .attr("id",treeData[index].name.toLowerCase());
   paintTier($treeNode,masteryData[index]);
   $("#masterySim").append($treeNode);
 }
@@ -64,7 +64,7 @@ var paintIcons = function($tierNode,tierData){
     $iconNode
       .addClass("icon")
       .addClass("order-"+masteries[i].order);
-    $iconNode.append($("<div>").addClass("icons-"+masteries[i].index).addClass("iconButton"));
+    $iconNode.append($("<div>").addClass("icons-"+masteries[i].index).addClass("icon-button"));
     $iconNode.append($("<div>").addClass("icon-frame"));
     if (tierData.type == c.TIER_NORMAL){
       $iconNode.append($("<div>").addClass("points"));
@@ -74,7 +74,7 @@ var paintIcons = function($tierNode,tierData){
 }
 
 function init(){
-  paintSim();
+  //paintSim();
   if (c.DEBUG){
     $(".icons-0").siblings(".icon-frame").addClass("unavailable");
     $(".icons-1").siblings(".icon-frame").addClass("available");
@@ -95,6 +95,9 @@ function init(){
 $(document).ready(init)
 
 var webapp = angular.module("webapp",[]);
-app.controller("simController", function($scope){
-}
+webapp.controller("simController", function($scope){
+  //clone data;
+  $scope.masteryData = JSON.parse(JSON.stringify(masteryData));
+  $scope.treeData = JSON.parse(JSON.stringify(treeData));
+});
 
