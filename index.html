@@ -6,14 +6,15 @@
     <link rel="stylesheet" href="css/sprite.css" type="text/css"/>
     <link rel="stylesheet" href="css/sprite-grayscale.css" type="text/css"/>
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
   </head>
-  <body>
+  <body data-ng-app="webapp">
     <div id="preload">
       <img src="imgs/mastery-sprite.png" width="1" height="1" alt=""/>
       <img src="imgs/mastery-sprite-grayscale.png" width="1" height="1" alt=""/>
       <img src="imgs/frame-sprite.png" width="1" height="1" alt=""/>
     </div>
-    <div id="masterySim">
+    <div id="masterySim" data-ng-controller="simController">
     </div>
   <div id="includes">
     <script type="text/javascript" src="js/data.js"></script>

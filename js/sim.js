@@ -93,3 +93,8 @@ function init(){
 }
 
 $(document).ready(init)
+
+var webapp = angular.module("webapp",[]);
+app.controller("simController", function($scope){
+}
+
