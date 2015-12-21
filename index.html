@@ -15,7 +15,7 @@
       <img src="imgs/frame-sprite.png" width="1" height="1" alt=""/>
     </div>
     <div id="masterySim" data-ng-controller="simController">	    <div ng-repeat="tree in treeData track by tree.id" class="tree" id="{{treeData[tree.id].name.toLowerCase()}}">
-		    <div ng-repeat="tier in masteryData[tree.id] track by tier.tier" class="tier tier-{{tier.tier}} {{tier.type+'-length-'+tier.masteries.length}}" ng-class="getKeyTierClass(tier)">
+        <div ng-repeat="tier in masteryData[tree.id] track by tier.tier" class="tier tier-{{tier.tier}} {{tier.type+'-length-'+tier.masteries.length}}" ng-class="getKeyTierClass(tier)">
           <div ng-repeat="icon in masteryData[tree.id][tier.tier].masteries" class="icon {{'order-'+icon.order}}">
             <div class="{{'icons-'+icon.index}} icon-button">
             </div>
