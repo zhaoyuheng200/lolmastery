@@ -111,15 +111,14 @@ var simInit = function (){
   paintMastery();
 }
 
-$(document).ready(init);
 
 var getModifyStatus = function(el,delta){
-  var totalPointsInTree = getTotalPointsInTree();
+  var totalPointsInMastery = getTotalPointsInMastery();
   var btnTier = getTier(el);
   var pointsRequired = c.POINTS_REQUIRED[btnTier];
   var pointsInTree = getPointsInTree(el);
   if (delta == 1){
-    if (totalPointsInTree < c.MAX_POINTS){
+    if (totalPointsInMastery < c.MAX_POINTS){
       if (pointsRequired > pointsInTree){
         return false;
       }else return true;
@@ -137,15 +136,15 @@ var getModifyStatus = function(el,delta){
             || treeBtnIndex != tierFirstBtnIndex && (t.masteryState[tree][tierFirstBtnIndex] > 0)){
           return true;
         }else{
-	  return false;
-	}
+          return false;
+        }
       }else{
-	var pointsInTier = 0;
-	for (var i = 0; i < tierBtnLength; i++){
-	  pointsInTier += t.masteryState[tree][tierFirstBtnIndex+i];
-	}
-	if (pointsInTier > 0) return true;
-	else return false;
+        var pointsInTier = 0;
+        for (var i = 0; i < tierBtnLength; i++){
+          pointsInTier += t.masteryState[tree][tierFirstBtnIndex+i];
+        }
+        if (pointsInTier > 0) return true;
+        else return false;
       }
     }
   }else if (delta == -1){
@@ -155,7 +154,7 @@ var getModifyStatus = function(el,delta){
     }else return false;
   }
 }
-var getTotalPointsInTree = function(){
+var getTotalPointsInMastery = function(){
   var retval = 0;
   for (var i = 0; i < t.masteryState.length; i++){
     retval += t.masteryState[i].reduce(function(p,c){return p+c;});
@@ -208,7 +207,7 @@ var alterMastery = function(el,delta){
             t.masteryState[tree][tierFirstBtnIndex+1] += 1;
 	  }
 	}
-      }else if (pointsInTier > 0 && (getTotalPointsInTree() + 1) > c.MAX_POINTS){
+      }else if (pointsInTier > 0 && (getTotalPointsInMastery() + 1) > c.MAX_POINTS){
         if (treeBtnIndex == tierFirstBtnIndex){
           t.masteryState[tree][tierFirstBtnIndex] += 1;
           t.masteryState[tree][tierFirstBtnIndex+1] -= 1;
@@ -216,7 +215,7 @@ var alterMastery = function(el,delta){
           t.masteryState[tree][tierFirstBtnIndex] -= 1;
           t.masteryState[tree][tierFirstBtnIndex+1] += 1;
 	}
-      }else if (pointsInTier == 0 && (getTotalPointsInTree() + 5) <= c.MAX_POINTS){
+      }else if (pointsInTier == 0 && (getTotalPointsInMastery() + 5) <= c.MAX_POINTS){
         t.masteryState[tree][treeBtnIndex] += 5;
       }else{
         t.masteryState[tree][treeBtnIndex] += 1;
@@ -247,6 +246,7 @@ var paintMastery = function(){
   $(".icon-frame").removeClass("active");
   $(".icon-button").removeClass("active");
   $(".points-content").text("0/5");
+  var totalPointsInMastery = getTotalPointsInMastery();
   //
   for (var i = 0; i < t.masteryState.length; i++){
     var pointsInTree = t.masteryState[i].reduce(function(p,c){return p+c;});
@@ -279,23 +279,29 @@ var paintMastery = function(){
 	  }
 	}
       }
+      if (tier == reachedTier && totalPointsInMastery == c.MAX_POINTS && getTierPoints(anchor[0]) == 0 ){
+	anchor.find(".icon-frame").removeClass("available");
+	anchor.find(".icon-button").removeClass("active");
+	anchor.find(".points").removeClass("open");
+      }
     }
   }
-  if (c.DEBUG){
-    $(".icons-0").siblings(".icon-frame").addClass("unavailable");
-    $(".icons-1").siblings(".icon-frame").addClass("available");
-    $(".icons-1").addClass("active");
-    $(".icons-2").siblings(".icon-frame").addClass("active");
-    $(".icons-6").siblings(".icon-frame").addClass("active");
-    $(".icons-10").siblings(".icon-frame").addClass("active");
-    $(".icons-15").siblings(".icon-frame").addClass("active");
-    $(".icons-20").siblings(".icon-frame").addClass("active");
-    $(".icons-24").siblings(".icon-frame").addClass("active");
-    $(".icons-27").siblings(".icon-frame").addClass("active");
-    $(".icons-30").siblings(".icon-frame").addClass("active");
-    $(".icons-34").siblings(".icon-frame").addClass("active");
-    $(".icons-37").siblings(".icon-frame").addClass("active");
+}
+
+var getTierPoints = function(el){
+  var treeBtnIndex = getTreeBtnIndex(el);
+  var tierFirstBtnIndex = 0;
+  var tier = getTier(el);
+  var tree = getTree(el);
+  for (var i = 0; i < tier; i++){
+    tierFirstBtnIndex += masteryData[tree][i].masteries.length;
   }
+  var tierBtnLength = masteryData[tree][tier].masteries.length;
+  var pointsInTier = 0;
+  for (var i = 0; i < tierBtnLength; i++){
+    pointsInTier += t.masteryState[tree][tierFirstBtnIndex+i];
+  }
+  return pointsInTier;
 }
 
 var getPointsInTree = function(el){
@@ -349,3 +355,4 @@ var getClassNumber = function(regex,el){
 }
 
 
+$(document).ready(init);
