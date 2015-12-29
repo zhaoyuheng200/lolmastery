@@ -98,3 +98,32 @@
 .icon-frame{
   background-position: 0px 0px;
 }
+
+.points {
+  top: 52px;
+  left: 30px;
+  height: 16px;
+  width: 38px;
+  border: 2px solid;
+  border-radius: 3px;
+  color: #717171;
+  border-color: #717171;
+  text-align: center;
+}
+.points.active{
+  border-color: #FFFC2A;
+  color: #FFFC2A;
+}
+.points.open{
+  border-color: #2A4BFF;
+  color: #2A4BFF;
+}
+.points div{
+  width: 100%;
+  height: 100%;
+  top: 0;
+}
+.points .background{
+  background-color: black;
+  opacity: .5;
+}
