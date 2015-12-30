@@ -16,11 +16,19 @@ var t = {
   buttonElements: [[],[],[]]
 }
 //
-var treeNames = ["Ferocity","Cunning","Resolve"];
 var paintSim = function(){
   for (var tree = 0; tree < 3; tree++){
     paintTree(tree);
   }
+  paintTooltip();
+}
+
+var paintTooltip = function(){
+  var $tipNode = $("<div>").addClass("tooltip");
+  $tipNode.append($("<div>").addClass("tip-icon-name"));
+  $tipNode.append($("<div>").addClass("tip-icon-rank"));
+  $tipNode.append($("<div>").addClass("tip-icon-content"));
+  $("#mastery-sim").append($tipNode);
 }
 
 var paintTree = function(index){
@@ -29,7 +37,8 @@ var paintTree = function(index){
       .addClass("tree")
       .attr("id",treeData[index].toLowerCase());
   paintTier($treeNode,masteryData[index]);
-  $("#masterySim").append($treeNode);
+  $treeNode.append($("<div>").addClass("tree-name").text(treeData[index]));
+  $("#mastery-sim").append($treeNode);
 }
 
 var paintTier = function($treeNode,tiers){
@@ -83,17 +92,73 @@ var paintIcons = function($tierNode,tierData){
       $iconNode.find(".icon-frame").addClass("unavailable");
     }
     $tierNode.append($iconNode);
+    $iconNode
+      .on("mouseover",function(event){
+        displayTooltip(this);
+      })
+      .on("mouseout",function(event){
+        $(".tooltip").hide();
+      })
   }
 }
 
-function init(){
-  paintSim();
-  simInit();
-  $("#masterySim").oncontextmenu = function(){return false;};
+var displayTooltip = function(el){
+  var tier = getTier(el);
+  var tree = getTree(el);
+  var index = getBtnIndex(el);
+  var treeBtnIndex = getTreeBtnIndex(el);
+  var points = t.masteryState[tree][treeBtnIndex];
+  var type = masteryData[tree][tier].type;
+  var mastery = masteryData[tree][tier].masteries.filter(function(val){
+    if (val.index == index) return true;
+  })[0];
+  $(".tooltip .tip-icon-name")
+    .text(mastery.name)
+    .removeClass("ferocity")
+    .removeClass("cunning")
+    .removeClass("resolve")
+    .addClass(treeData[tree].toLowerCase());
+  $(".tooltip .tip-icon-rank").text(""+points+"/"+mastery.levels);
+  if (points > 0) {
+    $(".tooltip .tip-icon-rank").addClass("active");
+  }else{
+    $(".tooltip .tip-icon-rank").removeClass("active");
+  }
+  var getDesc = function(mastery,rank){
+    var str =  mastery.desc;
+    var displayRank = rank > 0 ? rank-1 : 0;
+    if (mastery.levelDesc.length > 0){
+      str = mastery.levelDesc.reduce(function(p,c){
+        return p.split(c.holder).join(c.values[displayRank].toString());
+      },str);
+    }
+    return str;
+  }
+  //populate description
+  if (points == 0 || points == 5 || type == c.TIER_KEY){
+    $(".tooltip .tip-icon-content").html(getDesc(mastery,points).replace(/\n/g,"<br>"));
+  }
+  if (points > 0 && points < mastery.levels){
+    var str = getDesc(mastery,points) + "\n\nNext Rank:\n" + getDesc(mastery,points+1);
+    str = str.replace(/\n/g,"<br>");
+    $(".tooltip .tip-icon-content").html(str);
+  } 
+  console.log(str);
+  $(".tooltip").show();
 }
+
+
+function init(){
+  simInit();
+}
+
 var simInit = function (){
+  //disable right click
+  $("#mastery-sim").oncontextmenu = function(){return false;};
+  //paint mastery trees
+  paintSim();
   //setup t.masteryState;	
-  $("#masterySim").contextmenu(function(ev){ev.preventDefault();});
+  $("#mastery-sim").contextmenu(function(ev){ev.preventDefault();});
   for (var i = 0; i <= c.TREE_MAX_INDEX[0]; i++){
     t.masteryState[0][i] = 0;
   }
@@ -109,8 +174,21 @@ var simInit = function (){
   t.buttonElements[1] = $("#cunning .icon").sort(btnSortFn);
   t.buttonElements[2] = $("#resolve .icon").sort(btnSortFn);
   paintMastery();
+  //setup mousemove
+  $("#mastery-sim").on("mousemove",function(event){
+    var offsetx = 20, offsety = 20;
+    if (event.pageX - $(this).offset().left > $(this).width() - $(".tooltip").width() - 20){
+      offsetx = -$(".tooltip").width() - 20;
+    }
+    if (event.pageY - $(this).offset().top >  $(this).height() - $(".tooltip").height() - 20){
+      offsety = -$(".tooltip").height() - 20;
+    }
+    $(".tooltip").css({
+      left: event.pageX - $(this).offset().left + offsetx,
+      top: event.pageY - $(this).offset().top + offsety,
+    });
+  });
 }
-
 
 var getModifyStatus = function(el,delta){
   var totalPointsInMastery = getTotalPointsInMastery();
@@ -168,11 +246,6 @@ var btnMouseClick = function(ev){
   }else if (ev.button == 2){
     alterMastery(this,-1);
   }
-  /*console.log(this);
-  console.log(getBtnIndex(this));
-  console.log(getTreeBtnIndex(this));
-  console.log(getTier(this));
-  console.log(getTree(this));*/
 };
 
 var btnMouseWheel = function(ev){
@@ -237,8 +310,26 @@ var alterMastery = function(el,delta){
     }
   }
   paintMastery();
+  displayTooltip(el);
 };
-
+var exportMastery = function(){
+  var str = "";
+  for (var i = 0; i < t.masteryState.length; i++){
+    str += t.masteryState[i].join("");
+  }
+  return str;
+}
+var importMastery = function(str){
+  var array = str.split("");
+  for (var i = 0; i < t.masteryState.length; i++){
+    for (var j = 0; j < t.masteryState[i].length;j++){
+      t.masteryState[i][j] = parseInt(array.shift()); 
+    }
+  }
+}
+var validateMastery = function(){
+  //TODO
+}
 var paintMastery = function(){
   //clean up
   $(".points").removeClass("open").removeClass("active");

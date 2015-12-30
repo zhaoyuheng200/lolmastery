@@ -1,17 +1,97 @@
 /*css default*/
+body{
+  font-family: 'Montserrat', sans-serif;
+}
 #preload {
   display: none;
 }
-#masterySim {
+#outer {
+  position: absolute;
+  background-color: black;
+  width: 100%;
+  height: 100%;
+}
+
+#bottom{
+  padding-top: 20px;
+  color: #756B53;
+  width: 900px;
+  margin: 0 auto;
+  position: relative;
+}
+#bottom .copyright{
+  width: 400px;
+  margin: 0 auto;
+}
+#bottom .author{
+  font-family: 'Indie Flower', cursive;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  font-weight: 700;
+}
+#mastery-sim {
   background-image: url("../imgs/mastery-background.jpg");
   background-size: 100% 100%;
   width: 900px;
   height: 650px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+  position: relative;
+}
+.tooltip{
+  position: absolute;
+  display: none;
+  width: 280px;
+  background-color: #000;
+  padding: 0 10px;
+  border: 2px solid;
+  border-radius: 4px;
+  border-color: #616571;
+}
+.tooltip.show{
+  display: block;
+}
+.tooltip>div{
+  margin: 10px auto;
+}
+.tooltip .tip-icon-name{
+  font-size: 20px;
+}
+
+.tooltip .tip-icon-name.ferocity{
+  color: #b83200;
+}
+.tooltip .tip-icon-name.cunning{
+  color: #b853ee;
+}
+.tooltip .tip-icon-name.resolve{
+  color: #46a3ee;
+}
+.tooltip .tip-icon-rank{
+  font-size: 14px;
+  color: #2AFF5A;
+}
+.tooltip .tip-icon-rank.active{
+  color: #FFFC2A;
+}
+.tooltip .tip-icon-content{
+  font-size: 11px;
+  color: #fff;
 }
 .tree{
   padding-top: 20px;
   width: 300px;
   float: left;
+}
+
+.tree-name{
+  font-family: 'PT Sans Narrow', sans-serif;
+  text-align: center;
+  padding: 20px;
+  font-size: 30px;
+  color: #B6C162;
 }
 
 .tier{
@@ -29,6 +109,7 @@
 .tier.key-length-2, .tier.key-length-3{
   padding-top: 30px;
 }
+
 .icon{
   width: 64px;
   height: 64px;
@@ -36,9 +117,11 @@
   padding: 0px;
   position: absolute;
 }
+
 .icon div{
   position: absolute;
 }
+
 .normal-length-2>.icon.order-0{
   left: 0px;
 }
@@ -109,6 +192,8 @@
   color: #717171;
   border-color: #717171;
   text-align: center;
+  font-size: 13px;
+  cursor: default;
 }
 .points.active{
   border-color: #FFFC2A;
